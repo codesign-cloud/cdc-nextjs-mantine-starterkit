@@ -22,6 +22,10 @@ pnpm dev
 
 ---------------------------------------
 
+#### Quick links 
+- [Next.js: App Playground](https://vercel.com/templates/next.js/app-directory)
+- [Mantine](https://mantine.dev/)
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
