@@ -1,4 +1,8 @@
+"use client"
+/* todo - move provider to providers.ts and remove 'use client' */
+
 import './globals.css'
+import { MantineProvider } from '@mantine/core';
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <body>{children}</body>
+      </MantineProvider>
     </html>
   )
 }

@@ -1,8 +1,12 @@
+"use client"
+
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
+
+import { Button } from '@mantine/core';
 
 export default function Home() {
   return (
@@ -45,6 +49,11 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Mantine */}
+      <div>
+        <Button>Hello.world.mantine!</Button>
+      </div>
+
       <div className={styles.grid}>
         <a
           href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -57,6 +66,7 @@ export default function Home() {
           </h2>
           <p className={inter.className}>
             Find in-depth information about Next.js features and API.
+
           </p>
         </a>
 

@@ -14,10 +14,11 @@ pnpm dev
 
 ## Changelog 
 
-### 2023-03-02: Next.js 13.2
+### 2023-03-02: Next.js 13.2, Mantine 5.10
 - `app` directory with **Layout**, page, streaming, and SEO components
 - SEO support with metadata API
 - Improved `next/image` and new `@next/font`
+- Added Mantine as dependency
 
 ---------------------------------------
 
