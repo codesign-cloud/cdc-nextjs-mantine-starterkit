@@ -1,11 +1,9 @@
 # CDC NextJs Mantine StarterKit
 
----------------------------------------
-
 ## Getting Started
 
 1. Clone the repo
-2. Install dependencies  `npm install` / `yarn` / `pnpm install`
+2. Install dependencies  `npm install` / `yarn install` / `pnpm install`
 3. Run the dev server  `npm run dev` / `yarn dev` / `pnpm dev`
 
 ## Todo / wishlist
