@@ -7,7 +7,10 @@
     "dev-turbopack": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate-dev": "prisma migrate dev",
+    "migrate-reset": "prisma migrate reset",
+    "migrate-deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -25,7 +28,6 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "prisma": "^4.11.0",
-    "node-ts": "^5.1.2"
+    "prisma": "^4.11.0"
   }
 }
