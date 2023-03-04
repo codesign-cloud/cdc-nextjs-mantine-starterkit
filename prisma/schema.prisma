@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma Schema
 
 generator client {
   provider = "prisma-client-js"
@@ -11,15 +10,84 @@ datasource db {
 }
 
 model User {
-  id         Int                    @id @default(autoincrement())
-  username   String                 @unique @db.VarChar(32)
-  email      String?                @unique @db.VarChar(191)
-  fName      String                 @db.VarChar(96)
-  lName      String?                @db.VarChar(96)
-  password   String                 @db.VarChar(255)
-  avatarUrl  String?
-  meta       Json?                  @db.Json
-  createdAt  DateTime               @default(now()) @db.DateTime(0)
-  updatedAt  DateTime               @updatedAt @db.DateTime(0)
-  deletedAt  DateTime?              @db.DateTime(0)
+  id        Int       @id @default(autoincrement())
+  username  String    @unique @db.VarChar(32)
+  email     String?   @unique @db.VarChar(191)
+  fName     String    @db.VarChar(96)
+  lName     String?   @db.VarChar(96)
+  password  String    @db.VarChar(255)
+  avatarUrl String?   @db.VarChar(255)
+  meta      Json?     @db.Json
+  createdAt DateTime  @default(now()) @db.DateTime(0)
+  updatedAt DateTime  @updatedAt @db.DateTime(0)
+  deletedAt DateTime? @db.DateTime(0)
+  Content   Content[]
+}
+
+model Content {
+  id         Int                  @id @default(autoincrement())
+  title      String               @db.VarChar(255)
+  slug       String               @unique @db.VarChar(191)
+  type       String               @db.VarChar(32) // Article, Video, Podcast, etc
+  cat        String?              @db.VarChar(32) // Future/custom
+  subCat     String?              @db.VarChar(32) // Future/custom
+  content    Json?                @db.Json
+  author     User?                @relation(fields: [authorId], references: [id])
+  authorId   Int?
+  stage      String               @db.VarChar(32)
+  visibility String               @db.VarChar(32)
+  meta       Json?                @db.Json
+  createdAt  DateTime             @default(now()) @db.DateTime(0)
+  updatedAt  DateTime             @updatedAt @db.DateTime(0)
+  deletedAt  DateTime?            @db.DateTime(0)
+  categories ContentCategoryMap[]
+  tags       ContentTagMap[]
+}
+
+model Tag {
+  id        Int             @id @default(autoincrement())
+  name      String          @unique @db.VarChar(64)
+  slug      String          @unique @db.VarChar(72)
+  meta      Json?           @db.Json
+  createdAt DateTime        @default(now()) @db.DateTime(0)
+  updatedAt DateTime        @updatedAt @db.DateTime(0)
+  deletedAt DateTime?       @db.DateTime(0)
+  contents  ContentTagMap[]
+}
+
+model Category {
+  id        Int                  @id @default(autoincrement())
+  name      String               @unique @db.VarChar(64)
+  slug      String               @unique @db.VarChar(72)
+  meta      Json?                @db.Json
+  createdAt DateTime             @default(now()) @db.DateTime(0)
+  updatedAt DateTime             @updatedAt @db.DateTime(0)
+  deletedAt DateTime?            @db.DateTime(0)
+  contents  ContentCategoryMap[]
+}
+
+model ContentTagMap {
+  id        Int       @id @default(autoincrement())
+  content   Content   @relation(fields: [contentId], references: [id])
+  contentId Int
+  tag       Tag       @relation(fields: [tagId], references: [id])
+  tagId     Int
+  createdAt DateTime  @default(now()) @db.DateTime(0)
+  updatedAt DateTime  @updatedAt @db.DateTime(0)
+  deletedAt DateTime? @db.DateTime(0)
+
+  @@map("_map_content_tag")
+}
+
+model ContentCategoryMap {
+  id         Int       @id @default(autoincrement())
+  content    Content   @relation(fields: [contentId], references: [id])
+  contentId  Int
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  createdAt  DateTime  @default(now()) @db.DateTime(0)
+  updatedAt  DateTime  @updatedAt @db.DateTime(0)
+  deletedAt  DateTime? @db.DateTime(0)
+
+  @@map("_map_content_category")
 }
