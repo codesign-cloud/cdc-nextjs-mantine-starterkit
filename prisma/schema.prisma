@@ -10,20 +10,22 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  username  String    @unique @db.VarChar(32)
-  email     String?   @unique @db.VarChar(191)
-  fName     String    @db.VarChar(96)
-  lName     String?   @db.VarChar(96)
-  password  String    @db.VarChar(255)
-  avatarUrl String?   @db.VarChar(255)
-  meta      Json?     @db.Json
-  createdAt DateTime  @default(now()) @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @db.DateTime(0)
-  deletedAt DateTime? @db.DateTime(0)
-  Content   Content[]
-  Account   Account[]
-  Session   Session[]
+  id            Int       @id @default(autoincrement())
+  username      String?   @unique @db.VarChar(32)
+  email         String?   @unique @db.VarChar(191)
+  emailVerified DateTime?
+  name          String?
+  fName         String?   @db.VarChar(96)
+  lName         String?   @db.VarChar(96)
+  password      String?   @db.VarChar(255)
+  image         String?   @db.VarChar(255)
+  meta          Json?     @db.Json
+  createdAt     DateTime  @default(now()) @db.DateTime(0)
+  updatedAt     DateTime  @updatedAt @db.DateTime(0)
+  deletedAt     DateTime? @db.DateTime(0)
+  Content       Content[]
+  Accounts      Account[]
+  Sessions      Session[]
 }
 
 model Content {
@@ -95,18 +97,21 @@ model ContentCategoryMap {
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            Int
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+  id                       String  @id @default(cuid())
+  userId                   Int
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  oauth_token              String?
+  oauth_token_secret       String?
+  refresh_token_expires_in Int?
+  session_state            String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
