@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import {fetchJson} from "@/app/.core/http/fetch";
 import { useSession } from "next-auth/react"
+import Link from "next/link"
 
 interface UserProps {
 	params: {
@@ -18,6 +19,7 @@ export default function User({params}: UserProps) {
 	let id = Number(params?.id??0);
 
 	useEffect(() => {
+		console.log("useEffect");
 		fetchJson(`/api/user/${id}`).then(r=>setUser(r))
 	},[]);
 
@@ -41,7 +43,9 @@ export default function User({params}: UserProps) {
 				status === "authenticated" && <p>Authenticated</p>
 			}
 			<p>Session status: {session?.user?.name??"Not logged in"}</p>
-			{ (status !== "authenticated") ? <a href="/api/auth/signin">Sign in</a> : <a href="/api/auth/signout">Sign out</a> }
+			{ (status !== "authenticated") ? <Link href="/api/auth/signin">Sign in</Link> : <Link href="/api/auth/signout">Sign out</Link> }
+			<br/><br/>
+			<Link href="/">Home</Link>
 		</div>
 	);
 }

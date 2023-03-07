@@ -7,8 +7,11 @@ import styles from './page.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 import { Button } from '@mantine/core';
+import {useSession} from "next-auth/react";
+import Link from "next/link"
 
 export default function Home() {
+  const { data: session, status } = useSession()
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -52,6 +55,8 @@ export default function Home() {
       {/* Mantine */}
       <div>
         <Button>Hello.world.mantine!</Button>
+        <br/>
+        <Link href="/user/1">User id:1</Link>
       </div>
 
       <div className={styles.grid}>
