@@ -17,7 +17,7 @@ model User {
   name          String?
   fName         String?   @db.VarChar(96)
   lName         String?   @db.VarChar(96)
-  password      String?   @db.VarChar(255)
+  password      String?   @ignore @db.VarChar(255)
   image         String?   @db.VarChar(255)
   meta          Json?     @db.Json
   createdAt     DateTime  @default(now()) @db.DateTime(0)
