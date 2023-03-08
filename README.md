@@ -7,8 +7,8 @@
 3. Run the dev server  `npm run dev` / `yarn dev` / `pnpm dev`
 
 ## Todo / wishlist
-- [ ] Add `prisma` for database
-- [ ] Add `next-auth` for authentication
+- [x] Add `prisma` for database
+- [x] Add `next-auth` for authentication
 - [ ] Add `jotai` for state management
 - [ ] Add `next-i18next` for internationalization
 
