@@ -9,6 +9,7 @@
 ## Todo / wishlist
 - [x] Add `prisma` for database
 - [x] Add `next-auth` for authentication
+- [ ] Add `swr` for client side data fetching / caching / SSG / SSR
 - [ ] Add `jotai` for state management
 - [ ] Add `next-i18next` for internationalization
 
