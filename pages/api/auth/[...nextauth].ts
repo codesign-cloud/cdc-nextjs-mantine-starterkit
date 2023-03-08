@@ -144,7 +144,7 @@ export const authOptions: NextAuthOptions = {
             return session;
         },
         async jwt({ token, user, account, profile, isNewUser }) {
-            //token.userRole = "admin"
+            token.userRole = "admin"
             return token
         },
     },
