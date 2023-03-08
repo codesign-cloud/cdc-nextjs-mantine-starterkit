@@ -10,10 +10,43 @@ import { Button } from '@mantine/core';
 import {useSession} from "next-auth/react";
 import Link from "next/link"
 
+import { HeaderDefault } from "@/app/components/headers/HeaderDefault";
+
+
+
+const links =  [
+  { "link": "/user/1", "label": "User" },
+  {
+    "link": "#1",
+    "label": "Learn",
+    "links": [
+      { "link": "/docs", "label": "Documentation" },
+      { "link": "/resources", "label": "Resources" },
+      { "link": "/community", "label": "Community" },
+      { "link": "/blog", "label": "Blog" }
+    ]
+  },
+  { "link": "/about", "label": "About" },
+  { "link": "/pricing", "label": "Pricing" },
+  {
+    "link": "#2",
+    "label": "Support",
+    "links": [
+      { "link": "/faq", "label": "FAQ" },
+      { "link": "/demo", "label": "Book a demo" },
+      { "link": "/forums", "label": "Forums" }
+    ]
+  }
+];
+
+
 export default function Home() {
   const { data: session, status } = useSession()
   return (
     <main className={styles.main}>
+      <div style={{width:'100%'}}>
+        <HeaderDefault links={links}/>
+      </div>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
