@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	createStyles,
 	Menu,
@@ -6,15 +7,15 @@ import {
 	Container,
 	Group,
 	Button,
-	Burger,
-	rem,
+	Burger, Box,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
-import { Logo } from './../branding/logo';
+import {Logo} from "@/app/components/branding/logo";
 import DarkModeToggle from "@/app/.core/toggle/DarkModeToggle";
+import SearchInput from "@/app/(pages)/(app-layout)/SearchInput";
 
-const HEADER_HEIGHT = rem(60);
+const HEADER_HEIGHT = 60;
 
 const useStyles = createStyles((theme) => ({
 	inner: {
@@ -24,7 +25,7 @@ const useStyles = createStyles((theme) => ({
 		alignItems: 'center',
 	},
 
-	links: {
+	hideBelowSm: {
 		[theme.fn.smallerThan('sm')]: {
 			display: 'none',
 		},
@@ -39,7 +40,7 @@ const useStyles = createStyles((theme) => ({
 	link: {
 		display: 'block',
 		lineHeight: 1,
-		padding: `${rem(8)} ${rem(12)}`,
+		padding: '8px 12px',
 		borderRadius: theme.radius.sm,
 		textDecoration: 'none',
 		color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
@@ -52,7 +53,7 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	linkLabel: {
-		marginRight: rem(5),
+		marginRight: 5,
 	},
 }));
 
@@ -63,15 +64,14 @@ interface HeaderActionProps {
 export function HeaderDefault({ links }: HeaderActionProps) {
 	const { classes } = useStyles();
 	const [opened, { toggle }] = useDisclosure(false);
-
-	const items = links?.map((link) => {
-		const menuItems = link.links?.map((item) => (
+	const items = links.map((link) => {
+		const menuItems = link?.links?.length && link.links?.map((item) => (
 			<Menu.Item key={item.link}>{item.label}</Menu.Item>
 		));
 
 		if (menuItems) {
 			return (
-				<Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
+				<Menu key={link.label} trigger="hover">
 					<Menu.Target>
 						<a
 							href={link.link}
@@ -80,7 +80,7 @@ export function HeaderDefault({ links }: HeaderActionProps) {
 						>
 							<Center>
 								<span className={classes.linkLabel}>{link.label}</span>
-								<IconChevronDown size={rem(12)} stroke={1.5} />
+								<IconChevronDown size={12} stroke={1.5} />
 							</Center>
 						</a>
 					</Menu.Target>
@@ -102,20 +102,28 @@ export function HeaderDefault({ links }: HeaderActionProps) {
 	});
 
 	return (
-		<Header height={HEADER_HEIGHT} sx={{ borderBottom: 0 }} mb={120}>
+		<Header height={HEADER_HEIGHT}>
 			<Container className={classes.inner} fluid>
-				<Group>
+				<Group spacing="sm">
 					<Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
-					<Logo  />
+					<Box className={classes.hideBelowSm}>
+						<Logo size={36} darkModeSwitcher={false} className={classes.hideBelowSm} />
+					</Box>
 				</Group>
-				<Group spacing={5} className={classes.links}>
+				<Group spacing="sm" className={classes.hideBelowSm}>
 					{items}
 				</Group>
-				<Group>
-					<Button radius="xl" h={30}>
-						Get early access
+				<Group spacing="sm">
+					{/* Dark Mode Toggle */}
+					<Box className={classes.hideBelowSm}>
+						<DarkModeToggle type="switch"/>
+					</Box>
+					{/* Search */}
+					<SearchInput />
+					{/* Login Button */}
+					<Button radius="sm" sx={{ height: 30 }} variant="subtle">
+						Sign in
 					</Button>
-					<DarkModeToggle />
 				</Group>
 			</Container>
 		</Header>
