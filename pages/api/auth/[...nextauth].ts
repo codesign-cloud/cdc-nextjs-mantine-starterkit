@@ -135,7 +135,7 @@ export const authOptions: NextAuthOptions = {
         },
         async redirect({ url, baseUrl }) {
             // called on sign-in and sign-out
-            console.log("redirect urls", url, baseUrl);
+            // console.log("redirect urls", url, baseUrl);
             return baseUrl;
         },
         async session({ session, user, token }) {
