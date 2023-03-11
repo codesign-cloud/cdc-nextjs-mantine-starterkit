@@ -5,6 +5,11 @@ import {useRouter} from "next/navigation";
 import React from 'react';
 
 /* Ref == https://stackoverflow.com/a/67767054/849829 */
+type Crumb = {
+	link: string;
+	route: string;
+	label: string;
+};
 
 const RouteLabelMap = {
 	"/": "Home",
@@ -19,11 +24,13 @@ const RouteLabelMap = {
 */
 export default function AppBreadcrumbs() {
 
-	const router = useRouter();
-	const [crumbs, setCrumbs] = React.useState([]);
+	const [crumbs, setCrumbs] = React.useState<Crumb[]>([]);
 
+	const router = useRouter();
 	React.useEffect(() => {
+		// @ts-ignore
 		const segmentsPath = router?.asPath?.split("/");
+		// @ts-ignore
 		const segmentsRoute = router?.route?.split("/");
 		const crumbLinks = CombineCumulatively(segmentsPath);
 		const crumbLabels = CombineCumulatively(segmentsRoute);
@@ -49,6 +56,7 @@ export default function AppBreadcrumbs() {
 			crumbLabels,
 			crumbs,
 		});
+	// @ts-ignore
 	}, [router.route]);
 
 	return (
@@ -68,15 +76,17 @@ export default function AppBreadcrumbs() {
 function humanizeRoute(route:string) {
 	/* route samples = `/`, `/admin` */
 	// Replace / and capitalize first letter
-	return route?.replace("/", "").charAt(0).toUpperCase() + route.replace("/", "")?.slice(1);
+	if (!route) return "";
+	return route.replace("/", "").charAt(0).toUpperCase() + route.replace("/", "")?.slice(1);
 }
 
 function CombineCumulatively(segments: string[]) {
+	if (!segments) return [];
 	/*
 	when segments = ['1','2','3']
 	returns ['1','1/2','1/2/3']
 	*/
-	const links = segments?.reduce((acc:any, cur:any, curIndex:any) => {
+	const links = segments.reduce((acc: string[], cur: string, curIndex: number) => {
 		const last = curIndex > 1 ? acc[curIndex - 1] : "";
 		const newPath = last + "/" + cur;
 		acc.push(newPath);
