@@ -35,12 +35,12 @@ export default function UserInNavBar() {
 			>
 				<Group>
 					<Avatar
-						src={authStateRef?.authUser?.avatar??''}
+						src={''}
 						radius="xl"
 					/>
 					<Box sx={{ flex: 1 }}>
 						<Text size="sm" weight={500}>
-							{authStateRef?.authUser?.name??"SETME"}
+							{"NOT LOGGED IN"}
 						</Text>
 						<Text color="dimmed" size="xs">
 							ahorsefighter@gmail.com
