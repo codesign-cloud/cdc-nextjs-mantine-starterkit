@@ -15,7 +15,7 @@ import { HeaderDefault } from "@/app/components/headers/HeaderDefault";
 
 
 const links =  [
-  { "link": "/user/1", "label": "User" },
+  { "link": "/about", "label": "Features", links: [] },
   {
     "link": "#1",
     "label": "Learn",
@@ -26,8 +26,8 @@ const links =  [
       { "link": "/blog", "label": "Blog" }
     ]
   },
-  { "link": "/about", "label": "About" },
-  { "link": "/pricing", "label": "Pricing" },
+  { "link": "/about", "label": "About", links: [] },
+  { "link": "/pricing", "label": "Pricing", links: [] },
   {
     "link": "#2",
     "label": "Support",
