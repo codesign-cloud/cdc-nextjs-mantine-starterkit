@@ -7,7 +7,7 @@ import Link from "next/link"
 
 interface UserProps {
 	params: {
-		id: string;
+		id?: string;
 	}
 }
 
@@ -16,12 +16,13 @@ export default function User({params}: UserProps) {
 	const [user, setUser] = useState<any>(null);
 	const { data: session, status } = useSession()
 
-	let id = Number(params?.id??0);
+	let id = Number(params?.id??'0');
 
 	useEffect(() => {
-		console.log("useEffect");
+		console.log("useEffect rx id",id);
+		if(!id) return;
 		fetchJson(`/api/user/${id}`).then(r=>setUser(r))
-	},[]);
+	},[id]);
 
 
 	return (
