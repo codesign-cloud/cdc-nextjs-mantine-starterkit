@@ -1,3 +1,5 @@
+// Prisma client for SQL
+
 import { PrismaClient } from "@prisma/client"
 
 declare const globalThis: any;
