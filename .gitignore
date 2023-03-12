@@ -42,3 +42,9 @@ next-env.d.ts
 
 # custom
 scratchpad/
+
+# Sentry
+.sentryclirc
+
+# Sentry
+next.config.original.js
